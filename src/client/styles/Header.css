@@ -1,6 +1,28 @@
+.header__link,
+.header__link:visited {
+  color: var(--fg);
+}
+
+.header__link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.header__link:hover {
+  opacity: 0.8;
+}
+
+.header__link:active {
+  opacity: 0.5;
+}
+
 .header__icon,
 .header__title {
   font-weight: bold;
 }
 
-.header__icon {}
+.header__icon {
+  color: var(--fg-secondary);
+}

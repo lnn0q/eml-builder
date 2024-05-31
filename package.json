@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/server/main.js -w src/server",
+    "dev": "nodemon src/server/main.js -w src/server --host",
     "start": "NODE_ENV=production node src/server/main.js",
     "build": "vite build"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "react-dom": "^18.2.0",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
     "vite-express": "*"
   },
   "devDependencies": {

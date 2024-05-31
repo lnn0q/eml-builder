@@ -1,11 +1,16 @@
 import "./styles/Content.css";
-import Builder from "./Builder";
+import Editor from "./Editor";
+import Templates from "./Templates";
+
+import { Routes, Route } from "react-router-dom";
 
 const Content = () => {
   return (
     <main>
-      <div className=""></div>
-      <Builder />
+      <Routes>
+        <Route path="/editor/*" element={<Editor />} />
+        <Route path="/" element={<Templates />} />
+      </Routes>
     </main>
   );
 };

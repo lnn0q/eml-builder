@@ -8,6 +8,7 @@
   --bg: #eff1f5;
   --bg-secondary: #e6e9ef;
   --bg-selection: #7c7f93;
+  --bg-accent: #fe640b;
   --fg: #4c4f69;
   --fg-secondary: #8839ef;
   --fg-field: #dce0e8;
@@ -63,20 +64,17 @@ main {
 header {
   font-size: 1.3em;
   display: flex;
-  gap: 0.5em;
-  cursor: default;
 }
 
 main {
-  justify-content: center;
   flex-direction: column;
   flex-grow: 1;
 }
 
 a,
 a:visited {
-  all:unset;
   color: var(--fg-links);
+  text-decoration: none;
 }
 
 .icon {

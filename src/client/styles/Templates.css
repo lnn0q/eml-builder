@@ -1,0 +1,67 @@
+.templatesContainer,
+.templatesContainer__list,
+.templatesContainer__listItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.templatesContainer {
+  flex-grow: 1;
+}
+
+.templatesContainer__createLink {
+  width: 180px;
+  padding: 18px 0px;
+  margin: 80px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: var(--bg-accent);
+  /* border: 1px solid var(--fg); */
+  border-radius: 8px;
+}
+
+.templatesContainer__createLink,
+.templatesContainer__createLink:visited {
+  color: var(--bg);
+}
+
+.templatesContainer__list {
+  padding: 0;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.templatesContainer__link,
+.templatesContainer__link:visited {
+  color: var(--fg);
+}
+
+.templatesContainer__listItem {
+  width: 180px;
+  height: 180px;
+  justify-content: center;
+  list-style-type: none;
+  border: 1px solid var(--fg);
+  border-radius: 8px;
+}
+
+.templatesContainer__listItem:hover {
+  border: 2px solid var(--fg-secondary);
+}
+
+.templatesContainer__createLink:hover,
+.templatesContainer__listItem:hover {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.templatesContainer__createLink,
+.templatesContainer__listItem {
+  transition: padding 0.2s ease-in-out;
+}
+
+.templatesContainer__createLink:active,
+.templatesContainer__listItem:active {
+  opacity: 0.5;
+}
