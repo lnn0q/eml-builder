@@ -13,7 +13,8 @@
 .templatesContainer__createLink {
   width: 180px;
   padding: 18px 0px;
-  margin: 80px 0px;
+  margin-top: 140px;
+  margin-bottom: 20px;
   text-align: center;
   font-weight: bold;
   background-color: var(--bg-accent);
@@ -24,6 +25,11 @@
 .templatesContainer__createLink,
 .templatesContainer__createLink:visited {
   color: var(--bg);
+}
+
+.templatesContainer__ruler {
+  width: 80px;
+  border: 1px solid var(--fg-warning);
 }
 
 .templatesContainer__list {
