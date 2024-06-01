@@ -35,12 +35,142 @@
   border: 2px solid var(--bg-accent);
 }
 
+.editor__headerDateButton {
+  all: unset;
+  width: 40px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 4px;
+  margin-left: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--bg);
+  text-align: center;
+  background-color: var(--bg-accent);
+  border: none;
+  border-radius: 8px;
+}
+
 .editor__view {
+  position: relative;
   max-width: 842px;
   max-height: 842px;
   width: 80vw;
-  height: 50vh;
+  min-height: 45vh;
   padding: 8px;
   border: 1px solid var(--fg);
   border-radius: 8px;
+  user-select: none;
+}
+
+/* .editor__view > *, */
+.editor__dragComponent {
+  transition: padding 0.3s ease-in-out,
+              margin 0.3s ease-in-out;
+}
+
+/* .editor__view > *:hover, */
+.editor__dragComponent--editMode {
+  margin: 4px 0px;
+  padding: 8px;
+  border: 1px solid var(--bg-accent);
+  border-radius: 8px;
+}
+
+.editor__dragComponent--editMode:hover {
+  cursor: grab;
+}
+
+.editor__dragComponent--editMode:active {
+  cursor: grabbing;
+}
+
+.editor__editButtonContainer {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.editor__editButton {
+  width: 45px;
+  height: 45px;
+  color: var(--bg);
+  border: none;
+  border-radius: 100%;
+}
+
+.editor__editButton--edit {
+  font-size: 2em;
+  padding-left: 0px;
+  background-color: var(--bg-accent);
+}
+
+.editor__editButton--confirm {
+  padding-right: 10px;
+  font-size: 1.5em;
+  background-color: var(--fg-success);
+}
+
+.editor__componentsPanel {
+  width: 40%;
+  height: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--fg-field);
+  border-radius: 8px;
+  transition: width 0.5s ease-in-out,
+              height 0.5s ease-in-out,
+              padding 0.5s ease-in-out;
+}
+
+.editor__componentsPanel--edit {
+  width: 100%;
+  height: fit-content;
+  padding: 15px 0px;
+  gap: 20px;
+}
+
+.editor__componentsPanel * {
+  padding: 15px;
+  background-color: var(--bg);
+  /* border: 1px solid var(--fg); */
+  border-radius: 8px;
+  cursor: grab;
+  user-select: none;
+}
+
+.editor__componentsPanel *:active {
+  cursor: grabbing;
+}
+
+.editor__buttonPanel {
+  display: flex;
+  gap: 20px;
+}
+
+.editor__buttonPanel button {
+  padding: 15px;
+  color: var(--bg);
+  font-size: 1em;
+  font-weight: bold;
+  background-color: var(--bg-accent);
+  border: none;
+  border-radius: 8px;
+}
+
+.editor__buttonPanel :nth-child(1) {
+  /* background-color: var(--bg-selection); */
+}
+
+.editor__headerDateButton:hover,
+.editor__editButton:hover,
+.editor__buttonPanel button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.editor__headerDateButton:active,
+.editor__editButton:active,
+.editor__buttonPanel button:active {
+  opacity: 0.5;
 }

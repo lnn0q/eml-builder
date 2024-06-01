@@ -15,6 +15,7 @@
   --fg-warning: #df8e1d;
   --fg-error: #d20f39;
   --fg-links: #1e66f5;
+  --fg-success: #40a02b;
   
   color: var(--fg);
 
