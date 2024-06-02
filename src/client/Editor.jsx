@@ -12,7 +12,7 @@ const Editor = () => {
     Sender: "John Doe",
     Recipient: "James Johnson",
     Subject: "Test Subject",
-    Date: "12.12.2024",
+    Date: "Thu, 3 Mar 2024 12:00:00 +0100",
     bodyColor: "#ffffff",
     template: [
       {
@@ -39,7 +39,7 @@ const Editor = () => {
         type: "link",
         text: "Redirect",
         color: "#000000",
-        link: "",
+        link: "#",
         id: 4,
       },
     ],
@@ -51,6 +51,7 @@ const Editor = () => {
   const [draggedElement, setDraggedElement] = useState(null);
   const [dropPlace, setDropPlace] = useState(null);
   const [isEditMode, setEditMode] = useState(false);
+  const [editElement, setEditElement] = useState(null);
 
   // DnD functions
 
@@ -168,6 +169,7 @@ const Editor = () => {
 
   const handleEditClose = (e) => {
     e.preventDefault();
+    setEditElement(null);
     setEditMode(false);
   };
 
@@ -175,6 +177,24 @@ const Editor = () => {
 
   const handleEditElement = (e) => {
     e.preventDefault();
+    setEditElement(e.target.dataset.id);
+  };
+
+  const handleConfirmEdit = (e, color, text, width, height, alt, img, link) => {
+    e.preventDefault();
+    const newMailTemplate = mailData.template.map((element) => {
+      return element;
+    });
+    // console.log(newMailTemplate);
+    color ? (newMailTemplate[editElement - 1].color = color) : null;
+    text ? (newMailTemplate[editElement - 1].text = text) : null;
+    width ? (newMailTemplate[editElement - 1].width = width) : null;
+    height ? (newMailTemplate[editElement - 1].height = height) : null;
+    alt ? (newMailTemplate[editElement - 1].alt = alt) : null;
+    img ? (newMailTemplate[editElement - 1].img = img) : null;
+    link ? (newMailTemplate[editElement - 1].link = link) : null;
+    setMailData({ ...mailData, template: newMailTemplate });
+    setEditElement(null);
   };
 
   const handleRemoveElement = (e) => {
@@ -188,6 +208,7 @@ const Editor = () => {
 
   // Input handlers
 
+  // Header inputs
   const handleInputSender = (e) => {
     setMailData({ ...mailData, Sender: e.target.value });
   };
@@ -204,6 +225,7 @@ const Editor = () => {
     setMailData({ ...mailData, Date: e.target.value });
   };
 
+  // Header "get date" button
   const handleDate = (e) => {
     e.preventDefault();
   };
@@ -211,6 +233,7 @@ const Editor = () => {
   return (
     <form className="editor">
       <EditorHeader
+        mailData={mailData}
         handleInputSender={handleInputSender}
         handleInputRecipient={handleInputRecipient}
         handleInputSubject={handleInputSubject}
@@ -228,8 +251,10 @@ const Editor = () => {
         handleDrop={handleDrop}
         handleEditMode={handleEditMode}
         handleEditClose={handleEditClose}
-        handleEditElement={handleEditElement}
         handleRemoveElement={handleRemoveElement}
+        editElement={editElement}
+        handleEditElement={handleEditElement}
+        handleConfirmEdit={handleConfirmEdit}
       />
       <EditorComponentsPanel
         isEditMode={isEditMode}

@@ -13,6 +13,8 @@ const EditorView = ({
   handleEditClose,
   handleEditElement,
   handleRemoveElement,
+  editElement,
+  handleConfirmEdit,
 }) => {
   return (
     <div
@@ -34,6 +36,9 @@ const EditorView = ({
             handleEditMode={handleEditMode}
             handleRemoveElement={handleRemoveElement}
             handleDragStartExisting={handleDragStartExisting}
+            handleEditElement={handleEditElement}
+            editElement={editElement}
+            handleConfirmEdit={handleConfirmEdit}
           />
         );
       })}

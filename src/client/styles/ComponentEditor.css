@@ -1,0 +1,29 @@
+.componentEditor {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  gap: 10px;
+}
+
+.componentEditor__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.componentEditor__label {
+  
+}
+
+.componentEditor__input,
+.componentEditor__textarea {
+  all: unset;
+  padding: 4px;
+  background-color: var(--fg-field);
+  border-radius: 8px;
+}
+
+.componentEditor__textarea {
+  height: 100px;
+}

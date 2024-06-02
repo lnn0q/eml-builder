@@ -25,6 +25,7 @@
 
 .editor__headerField input {
   all: unset;
+  width: 55%;
   padding: 5px;
   background-color: var(--fg-field);
   border-radius: 8px;
@@ -125,6 +126,10 @@
   opacity: 0;
 }
 
+.editor__toolbarButtonContainer--selected {
+  opacity: 1;
+}
+
 .editor__editComponentButton {
   height: 25px;
   width: 40px;
@@ -138,6 +143,11 @@
 .editor__editComponentButton--edit {
   color: var(--bg);
   background-color: var(--bg-accent2);
+}
+
+.editor__editComponentButton--editConfirm {
+  color: var(--bg);
+  background-color: var(--fg-success);
 }
 
 .editor__editComponentButton--remove {

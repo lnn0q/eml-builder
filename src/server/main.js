@@ -5,8 +5,21 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// app.get("/", (req, res) => {});
+app.use(express.json());
+
+const templates = [
+  {
+    name: "Template 1",
+    id: 1,
+  },
+];
+
+app.get("/api/get-templates", (req, res) => {
+  res.json(templates);
+});
+
+app.get("/api/template/:id", (req, res) => {});
 
 ViteExpress.listen(app, PORT, () =>
-  console.log("Server is listening on port 3000...")
+  console.log(`Server is listening on port ${PORT}...`)
 );

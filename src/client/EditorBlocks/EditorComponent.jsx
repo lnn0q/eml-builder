@@ -1,3 +1,8 @@
+import ComponentEditor from "./ComponentEditor";
+import EditToolbar from "./EditToolbar";
+
+import { useState } from "react";
+
 const EditorComponent = ({
   element,
   isEditMode,
@@ -5,67 +10,105 @@ const EditorComponent = ({
   handleEditElement,
   handleRemoveElement,
   handleDragStartExisting,
+  editElement,
+  handleConfirmEdit,
 }) => {
-  return (
-    <>
-      <div
-        id={element.id}
-        onDragOver={handleDragOverDroppable}
-        className={
-          isEditMode
-            ? "editor__dragComponent editor__dragComponent--editMode"
-            : "editor__dragComponent"
-        }
-      >
-        {isEditMode ? (
-          <div className="editor__editToolbar">
-            <div className="editor__toolbarTitle">{element.type}</div>
-            <div className="editor__toolbarButtonContainer">
-              <button
-                data-id={element.id}
-                onClick={handleEditElement}
-                className="editor__editComponentButton editor__editComponentButton--edit"
-              >
-                &#xf044;
-              </button>
-              <button
-                data-id={element.id}
-                onClick={handleRemoveElement}
-                onDragStart={handleDragStartExisting}
-                className="editor__editComponentButton editor__editComponentButton--remove"
-              >
-                &#xf01b4;
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
-                data-id={element.id}
-                draggable={isEditMode ? true : false}
-                onDragStart={handleDragStartExisting}
-                className="editor__editComponentButton editor__editComponentButton--handlePull"
-              >
-                &#xf01db;
-              </button>
-            </div>
-          </div>
-        ) : null}
+  const [color, setColor] = useState(element.color);
+  const [text, setText] = useState(element.text);
+  const [width, setWidth] = useState(element.width);
+  const [height, setHeight] = useState(element.height);
+  const [alt, setAlt] = useState(element.alt);
+  const [img, setImg] = useState(element.img);
+  const [link, setLink] = useState(element.link);
 
-        {element.type === "text" ? (
-          <div style={{ color: element.color }}>{element.text}</div>
-        ) : element.type === "img" ? (
-          <img
-            src={element.img}
-            alt={element.alt}
-            width={element.width}
-            height={element.height}
-            style={{ objectFit: "cover" }}
-          />
-        ) : element.type === "link" ? (
-          <a src={element.link}>{element.text}</a>
-        ) : null}
-      </div>
-    </>
+  const handleInputColor = (e) => {
+    setColor(e.target.value);
+  };
+  const handleInputText = (e) => {
+    setText(e.target.value);
+  };
+  const handleInputWidth = (e) => {
+    setWidth(e.target.value);
+  };
+  const handleInputHeight = (e) => {
+    setHeight(e.target.value);
+  };
+  const handleInputAlt = (e) => {
+    setAlt(e.target.value);
+  };
+  const handleInputImg = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64Image = reader.result;
+      setImg(base64Image);
+    };
+    reader.readAsDataURL(file);
+  };
+  const handleInputLink = (e) => {
+    setLink(e.target.value);
+  };
+
+  return (
+    <div
+      id={element.id}
+      onDragOver={handleDragOverDroppable}
+      className={
+        isEditMode
+          ? "editor__dragComponent editor__dragComponent--editMode"
+          : "editor__dragComponent"
+      }
+    >
+      {isEditMode ? (
+        <EditToolbar
+          element={element}
+          handleRemoveElement={handleRemoveElement}
+          handleDragStartExisting={handleDragStartExisting}
+          handleEditElement={handleEditElement}
+          editElement={editElement}
+          handleConfirmEdit={handleConfirmEdit}
+          color={color}
+          text={text}
+          width={width}
+          height={height}
+          alt={alt}
+          img={img}
+          link={link}
+        />
+      ) : null}
+
+      {editElement == element.id ? (
+        <ComponentEditor
+          element={element}
+          color={color}
+          text={text}
+          width={width}
+          height={height}
+          alt={alt}
+          img={img}
+          link={link}
+          handleInputColor={handleInputColor}
+          handleInputText={handleInputText}
+          handleInputWidth={handleInputWidth}
+          handleInputHeight={handleInputHeight}
+          handleInputAlt={handleInputAlt}
+          handleInputImg={handleInputImg}
+          handleInputLink={handleInputLink}
+        />
+      ) : element.type === "text" ? (
+        <div style={{ color: element.color }}>{element.text}</div>
+      ) : element.type === "img" ? (
+        <img
+          src={element.img}
+          alt={element.alt}
+          width={element.width}
+          height={element.height}
+          style={{ objectFit: "cover" }}
+        />
+      ) : element.type === "link" ? (
+        <a src={element.link}>{element.text}</a>
+      ) : null}
+    </div>
   );
 };
 

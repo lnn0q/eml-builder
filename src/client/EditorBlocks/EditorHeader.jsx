@@ -1,6 +1,7 @@
 import React from "react";
 
 const EditorHeader = ({
+  mailData,
   handleInputSender,
   handleInputRecipient,
   handleInputSubject,
@@ -14,6 +15,7 @@ const EditorHeader = ({
         <input
           type="email"
           name="sender"
+          value={mailData.Sender}
           onChange={handleInputSender}
           required
         />
@@ -23,6 +25,7 @@ const EditorHeader = ({
         <input
           type="email"
           name="recipient"
+          value={mailData.Recipient}
           onChange={handleInputRecipient}
           required
         />
@@ -32,6 +35,7 @@ const EditorHeader = ({
         <input
           type="text"
           name="subject"
+          value={mailData.Subject}
           onChange={handleInputSubject}
           required
         />
@@ -39,7 +43,12 @@ const EditorHeader = ({
       <div className="editor__headerField editor__headerField--date">
         <div>Date:</div>
         <div className="editor__headerDateContainer">
-          <input type="text" name="date" onChange={handleInputDate} />
+          <input
+            type="text"
+            name="date"
+            value={mailData.Date}
+            onChange={handleInputDate}
+          />
           <button className="editor__headerDateButton" onClick={handleDate}>
             &#xf16e2;
           </button>
