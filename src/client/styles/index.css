@@ -3,13 +3,21 @@
   src: url("/fonts/Symbols.ttf");
 }
 
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
 :root {
 
   --bg: #eff1f5;
   --bg-secondary: #e6e9ef;
   --bg-selection: #7c7f93;
-  --bg-accent: #fe640b;
+  --bg-accent1: #fe640b;
+  --bg-accent2: #209fb5;
   --fg: #4c4f69;
+  --fg-subtext: #acb0be;
   --fg-secondary: #8839ef;
   --fg-field: #dce0e8;
   --fg-warning: #df8e1d;
@@ -76,6 +84,18 @@ a,
 a:visited {
   color: var(--fg-links);
   text-decoration: none;
+}
+
+button {
+    all: unset;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  opacity: 0.5;
 }
 
 .icon {

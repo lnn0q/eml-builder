@@ -1,4 +1,10 @@
 import "./styles/Editor.css";
+
+import EditorHeader from "./EditorBlocks/EditorHeader";
+import EditorView from "./EditorBlocks/EditorView";
+import EditorComponentsPanel from "./EditorBlocks/EditorComponentsPanel";
+import EditorButtonPanel from "./EditorBlocks/EditorButtonPanel";
+
 import { useEffect, useState } from "react";
 
 const Editor = () => {
@@ -11,22 +17,30 @@ const Editor = () => {
     template: [
       {
         type: "text",
-        text: "Some random text.",
+        text: "Test",
         color: "#000fff",
         id: 1,
       },
       {
+        type: "text",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        color: "#000000",
+        id: 2,
+      },
+      {
         type: "img",
         alt: "img",
-        img: "",
-        id: 2,
+        width: "250px",
+        height: "250px",
+        img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.xn--perrosrazapequea-lub.com%2Fwp-content%2Fuploads%2F2018%2F05%2Fpug-2048x1398.jpg&f=1&nofb=1&ipt=2a85679831aec9a8cf93ee897cd5ea6810323781b89c5655a5cfacf43fbf1ed7&ipo=images",
+        id: 3,
       },
       {
         type: "link",
         text: "Redirect",
         color: "#000000",
         link: "",
-        id: 3,
+        id: 4,
       },
     ],
   });
@@ -38,6 +52,8 @@ const Editor = () => {
   const [dropPlace, setDropPlace] = useState(null);
   const [isEditMode, setEditMode] = useState(false);
 
+  // DnD functions
+
   const handleDragStartNew = (e) => {
     setIsDragging(true);
     const element = e.target;
@@ -48,7 +64,13 @@ const Editor = () => {
         elementProps = { type: "text", text: "Text", color: "#000000" };
         break;
       case "img":
-        elementProps = { type: "img", alt: "img", img: "" };
+        elementProps = {
+          type: "img",
+          alt: "img",
+          img: "",
+          width: "250px",
+          height: "250px",
+        };
         break;
       case "link":
         elementProps = {
@@ -66,8 +88,9 @@ const Editor = () => {
     setIsDragging(true);
     setDraggedElement({
       alreadyExists: true,
-      id: e.target.id,
+      id: e.target.dataset.id,
     });
+    // console.log("Dragging id: " + e.target.dataset.id);
   };
 
   const handleDragEnd = (e) => {
@@ -80,8 +103,14 @@ const Editor = () => {
     e.preventDefault();
   };
 
+  const handleDragOverDroppable = (e) => {
+    e.preventDefault();
+    setDropPlace(e.currentTarget.id);
+  };
+
   const handleDrop = (e) => {
     e.preventDefault();
+    // console.log("Dropping on:" + dropPlace);
     let newMailTemplate;
     if (draggedElement.alreadyExists) {
       let newId;
@@ -103,6 +132,8 @@ const Editor = () => {
       // console.log(dropPlace);
       if (dropPlace) {
         draggedElement.id = dropPlace;
+      } else if (mailData.template.length === 0) {
+        draggedElement.id = 1;
       } else {
         draggedElement.id =
           mailData.template[mailData.template.length - 1].id + 1;
@@ -125,28 +156,37 @@ const Editor = () => {
     // console.log(isDragging + " " + draggedElement);
   };
 
-  const checkPosition = (e) => {
-    const element = e.target;
-    const rect = element.getBoundingClientRect();
-    const mouseY = e.clientY - rect.top;
-
-    if (mouseY <= rect.height / 2) {
-      setDropPlace(e.target.id);
-    } else {
-      setDropPlace(e.target.id);
-    }
-    // console.log("Check position ID - " + e.currentTarget.id);
-  };
+  // Edit mode hanlders
 
   const handleEditMode = (e) => {
     e.preventDefault();
     setEditMode(true);
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 300);
   };
 
   const handleEditClose = (e) => {
     e.preventDefault();
     setEditMode(false);
   };
+
+  // EditMode Draggable element handlers
+
+  const handleEditElement = (e) => {
+    e.preventDefault();
+  };
+
+  const handleRemoveElement = (e) => {
+    e.preventDefault();
+    const newMailTemplate = mailData.template.filter((element) => {
+      return element.id != e.target.dataset.id;
+    });
+    newMailTemplate.sort((a, b) => a.id - b.id);
+    setMailData({ ...mailData, template: newMailTemplate });
+  };
+
+  // Input handlers
 
   const handleInputSender = (e) => {
     setMailData({ ...mailData, Sender: e.target.value });
@@ -170,158 +210,33 @@ const Editor = () => {
 
   return (
     <form className="editor">
-      <div className="editor__headerPanel">
-        <div className="editor__headerField">
-          <div>From:</div>
-          <input
-            type="email"
-            name="sender"
-            onChange={handleInputSender}
-            required
-          />
-        </div>
-        <div className="editor__headerField">
-          <div>To:</div>
-          <input
-            type="email"
-            name="recipient"
-            onChange={handleInputRecipient}
-            required
-          />
-        </div>
-        <div className="editor__headerField">
-          <div>Subject:</div>
-          <input
-            type="text"
-            name="subject"
-            onChange={handleInputSubject}
-            required
-          />
-        </div>
-        <div className="editor__headerField editor__headerField--date">
-          <div>Date:</div>
-          <input type="text" name="date" onChange={handleInputDate} />
-          <button className="editor__headerDateButton" onClick={handleDate}>
-            &#xf16e2;
-          </button>
-        </div>
-      </div>
-      <div
-        className="editor__view"
-        id="view-drop"
-        style={{ backgroundColor: mailData.bodyColor }}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
-        {mailData.template.map((element) => {
-          return element.type === "text" ? (
-            <div
-              key={element.id}
-              id={element.id}
-              style={{ color: element.color }}
-              onDragOver={checkPosition}
-              draggable={isEditMode ? true : false}
-              onDragStart={handleDragStartExisting}
-              className={
-                isEditMode
-                  ? "editor__dragComponent editor__dragComponent--editMode"
-                  : "editor__dragComponent"
-              }
-            >
-              {element.text}
-            </div>
-          ) : element.type === "img" ? (
-            <div
-              key={element.id}
-              id={element.id}
-              onDragOver={checkPosition}
-              draggable={isEditMode ? true : false}
-              onDragStart={handleDragStartExisting}
-              className={
-                isEditMode
-                  ? "editor__dragComponent editor__dragComponent--editMode"
-                  : "editor__dragComponent"
-              }
-            >
-              <img src={element.img} alt={element.alt} />
-            </div>
-          ) : element.type === "link" ? (
-            <div
-              key={element.id}
-              id={element.id}
-              style={{ color: element.color }}
-              onDragOver={checkPosition}
-              draggable={isEditMode ? true : false}
-              onDragStart={handleDragStartExisting}
-              className={
-                isEditMode
-                  ? "editor__dragComponent editor__dragComponent--editMode"
-                  : "editor__dragComponent"
-              }
-            >
-              <a>{element.text}</a>
-            </div>
-          ) : null;
-        })}
-        <div className="editor__editButtonContainer">
-          {isEditMode ? (
-            <button
-              className="editor__editButton editor__editButton--confirm"
-              onClick={handleEditClose}
-            >
-              &#xf42e;
-            </button>
-          ) : (
-            <button
-              className="editor__editButton editor__editButton--edit"
-              onClick={handleEditMode}
-            >
-              &#xf11e7;
-            </button>
-          )}
-        </div>
-      </div>
-      <div
-        className={
-          isEditMode
-            ? "editor__componentsPanel editor__componentsPanel--edit"
-            : "editor__componentsPanel"
-        }
-      >
-        {isEditMode ? (
-          <>
-            <div
-              data-type="text"
-              draggable
-              onDragStart={handleDragStartNew}
-              onDragEnd={handleDragEnd}
-            >
-              text
-            </div>
-            <div
-              data-type="img"
-              draggable
-              onDragStart={handleDragStartNew}
-              onDragEnd={handleDragEnd}
-            >
-              img
-            </div>
-            <div
-              data-type="link"
-              draggable
-              onDragStart={handleDragStartNew}
-              onDragEnd={handleDragEnd}
-            >
-              link
-            </div>
-          </>
-        ) : null}
-      </div>
-      <div className="editor__buttonPanel">
-        <button>Save</button>
-        <button>Preview</button>
-        <button>Download</button>
-      </div>
+      <EditorHeader
+        handleInputSender={handleInputSender}
+        handleInputRecipient={handleInputRecipient}
+        handleInputSubject={handleInputSubject}
+        handleInputDate={handleInputDate}
+        handleDate={handleDate}
+      />
+      <EditorView
+        mailData={mailData}
+        isEditMode={isEditMode}
+        handleDragStartNew={handleDragStartNew}
+        handleDragStartExisting={handleDragStartExisting}
+        handleDragEnd={handleDragEnd}
+        handleDragOver={handleDragOver}
+        handleDragOverDroppable={handleDragOverDroppable}
+        handleDrop={handleDrop}
+        handleEditMode={handleEditMode}
+        handleEditClose={handleEditClose}
+        handleEditElement={handleEditElement}
+        handleRemoveElement={handleRemoveElement}
+      />
+      <EditorComponentsPanel
+        isEditMode={isEditMode}
+        handleDragStartNew={handleDragStartNew}
+        handleDragEnd={handleDragEnd}
+      />
+      <EditorButtonPanel />
     </form>
   );
 };

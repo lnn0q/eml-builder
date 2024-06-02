@@ -27,40 +27,46 @@
   all: unset;
   padding: 5px;
   background-color: var(--fg-field);
-  border: none;
   border-radius: 8px;
 }
 
 .editor__headerField input:focus {
-  border: 2px solid var(--bg-accent);
+  border: 2px solid var(--bg-accent1);
+}
+
+.editor__headerDateContainer {
+  width: 100%;
+  display: flex;
 }
 
 .editor__headerDateButton {
   all: unset;
-  width: 40px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-right: 4px;
+  width: 50px;
   margin-left: 10px;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: bold;
+  font-family: 'Symbols Only';
   color: var(--bg);
   text-align: center;
-  background-color: var(--bg-accent);
-  border: none;
+  background-color: var(--bg-accent1);
   border-radius: 8px;
 }
 
 .editor__view {
   position: relative;
   max-width: 842px;
-  max-height: 842px;
   width: 80vw;
   min-height: 45vh;
   padding: 8px;
   border: 1px solid var(--fg);
   border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.editor__view--editMode {
+  padding-bottom: 60px;
   user-select: none;
+
 }
 
 /* .editor__view > *, */
@@ -71,42 +77,105 @@
 
 /* .editor__view > *:hover, */
 .editor__dragComponent--editMode {
+  display: flex;
+  flex-direction: column;
   margin: 4px 0px;
   padding: 8px;
-  border: 1px solid var(--bg-accent);
+  /* padding-top: 35px; */
+  border: 1px solid var(--bg-accent1);
+  border-radius: 8px;
+  gap: 5px;
+}
+
+.editor__dragComponent--editMode img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.editor__dragComponent--editMode:hover .editor__toolbarButtonContainer,
+.editor__dragComponent--editMode:active .editor__toolbarButtonContainer {
+  /* cursor: grab; */
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+.editor__editToolbar {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding: 3px;
+  background-color: var(--fg-field);
   border-radius: 8px;
 }
 
-.editor__dragComponent--editMode:hover {
-  cursor: grab;
+.editor__toolbarTitle {
+  width: 150px;
+  padding-left: 10px;
+  padding-top: 2px;
+  color: var(--bg);
+  font-size: 1em;
+  background-color: #9ca0b0;
+  border-radius: 20px;
 }
 
-.editor__dragComponent--editMode:active {
-  cursor: grabbing;
+.editor__toolbarButtonContainer {
+  display: flex;
+  gap: 5px;
+  opacity: 0;
+}
+
+.editor__editComponentButton {
+  height: 25px;
+  width: 40px;
+  text-align: center;
+  font-size: 1.2em;
+  font-family: 'Symbols Only';
+  /* background-color: var(--bg-selection); */
+  border-radius: 8px;
+}
+
+.editor__editComponentButton--edit {
+  color: var(--bg);
+  background-color: var(--bg-accent2);
+}
+
+.editor__editComponentButton--remove {
+  color: var(--bg);
+  background-color: var(--fg-error);
+}
+
+.editor__editComponentButton--handlePull {
+  font-size: 1.3em;
+  color: var(--bg-accent1);
 }
 
 .editor__editButtonContainer {
   position: absolute;
   bottom: 10px;
   right: 10px;
+  z-index: 10;
 }
 
 .editor__editButton {
   width: 45px;
   height: 45px;
   color: var(--bg);
-  border: none;
+  text-align: center;
+  font-family: 'Symbols Only';
   border-radius: 100%;
 }
 
-.editor__editButton--edit {
+.editor__editButton--editMode div {
   font-size: 2em;
-  padding-left: 0px;
-  background-color: var(--bg-accent);
+  padding-left: 5px;
+}
+
+.editor__editButton--editMode {
+  background-color: var(--bg-accent1);
 }
 
 .editor__editButton--confirm {
-  padding-right: 10px;
   font-size: 1.5em;
   background-color: var(--fg-success);
 }
@@ -123,7 +192,7 @@
               padding 0.5s ease-in-out;
 }
 
-.editor__componentsPanel--edit {
+.editor__componentsPanel--editMode {
   width: 100%;
   height: fit-content;
   padding: 15px 0px;
@@ -133,7 +202,6 @@
 .editor__componentsPanel * {
   padding: 15px;
   background-color: var(--bg);
-  /* border: 1px solid var(--fg); */
   border-radius: 8px;
   cursor: grab;
   user-select: none;
@@ -153,17 +221,13 @@
   color: var(--bg);
   font-size: 1em;
   font-weight: bold;
-  background-color: var(--bg-accent);
-  border: none;
+  background-color: var(--bg-accent1);
   border-radius: 8px;
-}
-
-.editor__buttonPanel :nth-child(1) {
-  /* background-color: var(--bg-selection); */
 }
 
 .editor__headerDateButton:hover,
 .editor__editButton:hover,
+.editor__editComponentButton:hover,
 .editor__buttonPanel button:hover {
   cursor: pointer;
   opacity: 0.8;
@@ -171,6 +235,7 @@
 
 .editor__headerDateButton:active,
 .editor__editButton:active,
+.editor__editComponentButton:active,
 .editor__buttonPanel button:active {
   opacity: 0.5;
 }
