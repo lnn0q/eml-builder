@@ -2,27 +2,7 @@ import "./styles/Templates.css";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-const Templates = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [errMsg, setErrMsg] = useState(null);
-  const [templates, setTemplates] = useState([]);
-
-  useEffect(() => {
-    fetchTemplates();
-  }, [templates]);
-
-  const fetchTemplates = async () => {
-    try {
-      const res = await fetch("/api/template");
-      if (!res.ok) throw Error("Failed recieve data");
-      let templatesList = await res.json();
-      setTemplates(templatesList);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
+const Templates = ({ isLoading, errMsg, templates }) => {
   return (
     <div className="templatesContainer">
       <Link to="/editor" className="templatesContainer__createLink">
@@ -38,9 +18,9 @@ const Templates = () => {
           <>
             {templates.map((template) => (
               <Link
-                to={`/editor/${template.id}`}
+                to={`/editor/${template._id}`}
                 className="templatesContainer__link"
-                key={template.id}
+                key={template._id}
               >
                 <li className="templatesContainer__listItem">
                   <div className="templatesContainer__itemName">

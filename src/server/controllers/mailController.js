@@ -12,7 +12,7 @@ const getMailTemplateNames = async (req, res) => {
 const getMailTemplate = async (req, res) => {
   if (!req?.params?.id)
     return res.status(400).json({ message: "ID is required" });
-  const template = await Mail.findOne({ _id: req.body.id }).exec();
+  const template = await Mail.findOne({ _id: req.params.id }).exec();
   if (!template) {
     return res
       .status(204)

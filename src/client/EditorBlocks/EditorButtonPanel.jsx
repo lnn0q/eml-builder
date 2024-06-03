@@ -9,7 +9,10 @@ const EditorButtonPanel = ({ mailData }) => {
       console.log(mailData);
       const response = await fetch("/api/template", {
         method: "POST",
-        body: mailData,
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(mailData),
       });
       if (!response.ok) throw Error("Failed recieve data");
       navigate("/");

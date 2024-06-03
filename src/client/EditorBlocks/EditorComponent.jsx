@@ -61,7 +61,7 @@ const EditorComponent = ({
 
   return (
     <div
-      pos={element.pos}
+      data-pos={element.pos}
       onDragOver={handleDragOverDroppable}
       className={
         isEditMode
@@ -111,8 +111,8 @@ const EditorComponent = ({
         <img
           src={element.img}
           alt={element.alt}
-          width={element.width}
-          height={element.height}
+          width={element.width + "px"}
+          height={element.height + "px"}
           style={{ objectFit: "cover" }}
         />
       ) : element.type === "link" ? (

@@ -43,18 +43,18 @@ const ComponentEditor = ({
       ) : element.type === "img" ? (
         <>
           <div className="componentEditor__container">
-            <div className="componentEditor__label">Width:</div>
+            <div className="componentEditor__label">Width(px):</div>
             <input
               type="text"
-              placeholder="250px"
+              placeholder="250"
               onChange={handleInputWidth}
               value={width}
               className="componentEditor__input componentEditor__input--imageParam"
             />
-            <div className="componentEditor__label">Height:</div>
+            <div className="componentEditor__label">Height(px):</div>
             <input
               type="text"
-              placeholder="250px"
+              placeholder="250"
               onChange={handleInputHeight}
               value={height}
               className="componentEditor__input componentEditor__input--imageParam"

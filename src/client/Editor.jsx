@@ -8,7 +8,7 @@ import EditorButtonPanel from "./EditorBlocks/EditorButtonPanel";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const Editor = () => {
+const Editor = ({ templates }) => {
   const { id } = useParams();
 
   // Init
@@ -35,6 +35,7 @@ const Editor = () => {
     try {
       if (id) {
         const res = await fetch(`/api/template/${id}`);
+        console.log(res);
         if (!res.ok) throw Error("Failed recieve data");
         let resMailData = await res.json();
         setMailData(resMailData);
@@ -49,6 +50,45 @@ const Editor = () => {
           bodyColor: "#ffffff",
           template: [],
         });
+
+        // setMailData({
+        //   name: "PugTemplate",
+        //   Sender: "johndoe@test.com",
+        //   Recipient: "jamesjohnson@test.com",
+        //   Subject: "Test Subject",
+        //   Date: "Thu, 3 Mar 2024 12:00:00 +0100",
+        //   bodyColor: "#ffffff",
+        //   template: [
+        //     {
+        //       type: "text",
+        //       text: "Test",
+        //       color: "#000fff",
+        //       pos: 1,
+        //     },
+        //     {
+        //       type: "text",
+        //       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        //       color: "#000000",
+        //       pos: 2,
+        //     },
+        //     {
+        //       type: "img",
+        //       alt: "img",
+        //       width: 250,
+        //       height: 250,
+        //       img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.xn--perrosrazapequea-lub.com%2Fwp-content%2Fuploads%2F2018%2F05%2Fpug-2048x1398.jpg&f=1&nofb=1&ipt=2a85679831aec9a8cf93ee897cd5ea6810323781b89c5655a5cfacf43fbf1ed7&ipo=images",
+        //       pos: 3,
+        //     },
+        //     {
+        //       type: "link",
+        //       text: "Redirect",
+        //       color: "#000000",
+        //       link: "#",
+        //       pos: 4,
+        //     },
+        //   ],
+        // });
+
         setIsLoading(false);
       }
     } catch (err) {
@@ -72,8 +112,8 @@ const Editor = () => {
           type: "img",
           alt: "img",
           img: "",
-          width: "250px",
-          height: "250px",
+          width: 250,
+          height: 250,
         };
         break;
       case "link":
@@ -110,11 +150,14 @@ const Editor = () => {
 
   const handleDragOverDroppable = (e) => {
     e.preventDefault();
-    setDropPlace(Number(e.currentTarget.pos));
+    // console.log(e.currentTarget.pos);
+    // console.log(Number(e.currentTarget.pos));
+    setDropPlace(Number(e.currentTarget.dataset.pos));
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
+    // console.log(draggedElement);
     // console.log("Dropping on:" + dropPlace);
     let newMailTemplate;
     if (draggedElement.alreadyExists) {
