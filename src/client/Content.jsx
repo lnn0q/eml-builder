@@ -8,7 +8,8 @@ const Content = () => {
   return (
     <main>
       <Routes>
-        <Route path="/editor/*" element={<Editor />} />
+        <Route path="/editor" element={<Editor />} />
+        <Route path="/editor/:id" element={<Editor />} />
         <Route path="/" element={<Templates />} />
       </Routes>
     </main>

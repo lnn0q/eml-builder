@@ -6,16 +6,18 @@ import EditorComponentsPanel from "./EditorBlocks/EditorComponentsPanel";
 import EditorButtonPanel from "./EditorBlocks/EditorButtonPanel";
 
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Editor = () => {
-  const [mailData, setMailData] = useState({
-    Sender: "",
-    Recipient: "",
-    Subject: "",
-    Date: "",
-    bodyColor: "#ffffff",
-    template: [],
-  });
+  const { id } = useParams();
+
+  // Init
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [errMsg, setErrMsg] = useState(null);
+  const [mailData, setMailData] = useState();
+
+  // Functionality
 
   const [isDragging, setIsDragging] = useState(false);
   const [draggedElement, setDraggedElement] = useState(null);
@@ -23,7 +25,35 @@ const Editor = () => {
   const [isEditMode, setEditMode] = useState(false);
   const [editElement, setEditElement] = useState(null);
 
-  // useEffect(() => {}, [mailData, editElement]);
+  // Dependency
+
+  useEffect(() => {
+    fetchMailData();
+  }, []);
+
+  const fetchMailData = async () => {
+    try {
+      if (id) {
+        const res = await fetch(`/api/template/${id}`);
+        if (!res.ok) throw Error("Failed recieve data");
+        let resMailData = await res.json();
+        setMailData(resMailData);
+        setIsLoading(false);
+      } else {
+        setMailData({
+          Sender: "",
+          Recipient: "",
+          Subject: "",
+          Date: "",
+          bodyColor: "#ffffff",
+          template: [],
+        });
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setErrMsg(err.message);
+    }
+  };
 
   // DnD functions
 
@@ -219,7 +249,11 @@ const Editor = () => {
 
   const handleEmlDownload = () => {};
 
-  return (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : !isLoading && errMsg ? (
+    <div>{errMsg}</div>
+  ) : (
     <form className="editor">
       <EditorHeader
         mailData={mailData}

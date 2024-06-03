@@ -9,24 +9,16 @@ app.use(express.json());
 
 const templates = [
   {
-    name: "Template 1",
+    name: "PugTemplate",
     id: 1,
-  },
-  {
-    name: "Template 2",
-    id: 2,
-  },
-  {
-    name: "Template 3",
-    id: 3,
   },
 ];
 
 const mailData = [
   {
     id: 1,
-    Sender: "John Doe",
-    Recipient: "James Johnson",
+    Sender: "johndoe@test.com",
+    Recipient: "jamesjohnson@test.com",
     Subject: "Test Subject",
     Date: "Thu, 3 Mar 2024 12:00:00 +0100",
     bodyColor: "#ffffff",
@@ -63,10 +55,20 @@ const mailData = [
 ];
 
 app.get("/api/get-templates", (req, res) => {
-  res.json(templates);
+  try {
+    res.json(templates);
+  } catch (err) {
+    res.status(500).message(err.message);
+  }
 });
 
-app.get("/api/template/:id", (req, res) => {});
+app.get("/api/template/:id", (req, res) => {
+  try {
+    res.json(mailData[req.params.id - 1]);
+  } catch (err) {
+    res.status(500).message(err.message);
+  }
+});
 
 ViteExpress.listen(app, PORT, () =>
   console.log(`Server is listening on port ${PORT}...`)
