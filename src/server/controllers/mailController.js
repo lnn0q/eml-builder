@@ -56,7 +56,6 @@ const addMailTemplate = async (req, res) => {
 // };
 
 const updateMailTemplate = async (req, res) => {
-  console.log("check1");
   if (!req?.body?._id) {
     return res.status(400).json({ message: "ID paramater is required." });
   }
@@ -71,7 +70,6 @@ const updateMailTemplate = async (req, res) => {
         .status(204)
         .json({ message: `No template matches ID ${req.body._id}` });
     }
-    console.log("check-suc");
     res.status(200).json(template);
   } catch (err) {
     res.status(500).send(err.message);

@@ -248,13 +248,21 @@
   gap: 20px;
 }
 
-.editor__buttonPanel button {
+.editor__button {
   padding: 15px;
   color: var(--bg);
   font-size: 1em;
   font-weight: bold;
   background-color: var(--bg-accent1);
   border-radius: 8px;
+}
+
+.editor__button--update {
+  background-color: var(--fg-success);
+}
+
+.editor__button--delete {
+  background-color: var(--fg-error);
 }
 
 .editor__headerDateButton:hover,
@@ -270,4 +278,14 @@
 .editor__editComponentButton:active,
 .editor__buttonPanel button:active {
   opacity: 0.5;
+}
+
+
+/* Phone Only */
+@media (max-width: 499px) {
+ .editor__buttonPanel {
+    width: 90%;
+    text-align: center;
+    flex-direction: column-reverse;
+  } 
 }
