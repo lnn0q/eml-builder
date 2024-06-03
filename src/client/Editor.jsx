@@ -149,6 +149,8 @@ const Editor = () => {
     }
     newMailTemplate.sort((a, b) => a.id - b.id);
     setMailData({ ...mailData, template: newMailTemplate });
+    console.log(draggedElement);
+    console.log(newMailTemplate);
     setIsDragging(false);
     setDraggedElement(null);
     setDropPlace(null);
@@ -228,6 +230,8 @@ const Editor = () => {
   // Header "get date" button
   const handleDate = (e) => {
     e.preventDefault();
+    const date = new Date().toUTCString();
+    setMailData({ ...mailData, Date: date });
   };
 
   return (
