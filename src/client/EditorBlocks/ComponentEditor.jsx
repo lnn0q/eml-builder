@@ -1,7 +1,5 @@
 import "../styles/ComponentEditor.css";
 
-import { useState } from "react";
-
 const ComponentEditor = ({
   element,
   color,

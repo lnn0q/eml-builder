@@ -1,7 +1,7 @@
 import ComponentEditor from "./ComponentEditor";
 import EditToolbar from "./EditToolbar";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EditorComponent = ({
   element,
@@ -20,6 +20,16 @@ const EditorComponent = ({
   const [alt, setAlt] = useState(element.alt);
   const [img, setImg] = useState(element.img);
   const [link, setLink] = useState(element.link);
+
+  useEffect(() => {
+    setColor(element.color);
+    setText(element.text);
+    setWidth(element.width);
+    setHeight(element.height);
+    setAlt(element.alt);
+    setImg(element.img);
+    setLink(element.link);
+  }, [element]);
 
   const handleInputColor = (e) => {
     setColor(e.target.value);
@@ -77,7 +87,7 @@ const EditorComponent = ({
         />
       ) : null}
 
-      {editElement == element.id ? (
+      {editElement === element.id ? (
         <ComponentEditor
           element={element}
           color={color}
@@ -106,7 +116,9 @@ const EditorComponent = ({
           style={{ objectFit: "cover" }}
         />
       ) : element.type === "link" ? (
-        <a src={element.link}>{element.text}</a>
+        <a src={element.link} style={{ color: element.color }}>
+          {element.text}
+        </a>
       ) : null}
     </div>
   );
