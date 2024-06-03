@@ -80,7 +80,7 @@ app.use(express.json());
 //   }
 // });
 
-app.use("/", mailTemplateRouter);
+app.use("/api/template", mailTemplateRouter);
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");

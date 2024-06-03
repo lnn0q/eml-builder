@@ -2,6 +2,7 @@ import React from "react";
 
 const EditorHeader = ({
   mailData,
+  handleTemplateName,
   handleInputSender,
   handleInputRecipient,
   handleInputSubject,
@@ -11,6 +12,15 @@ const EditorHeader = ({
 }) => {
   return (
     <div className="editor__headerPanel">
+      <div className="editor__headerField">
+        <div>Template name:</div>
+        <input
+          type="text"
+          value={mailData.name}
+          onChange={handleTemplateName}
+          className="editor__headerInput"
+        />
+      </div>
       <div className="editor__headerField">
         <div>From:</div>
         <input

@@ -13,7 +13,7 @@ const Templates = () => {
 
   const fetchTemplates = async () => {
     try {
-      const res = await fetch("/api/get-templates");
+      const res = await fetch("/api/template");
       if (!res.ok) throw Error("Failed recieve data");
       let templatesList = await res.json();
       setTemplates(templatesList);

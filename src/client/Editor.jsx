@@ -41,6 +41,7 @@ const Editor = () => {
         setIsLoading(false);
       } else {
         setMailData({
+          name: "",
           Sender: "",
           Recipient: "",
           Subject: "",
@@ -218,6 +219,11 @@ const Editor = () => {
   // Input handlers
 
   // Header inputs
+
+  const handleTemplateName = (e) => {
+    setMailData({ ...mailData, name: e.target.value });
+  };
+
   const handleInputSender = (e) => {
     setMailData({ ...mailData, Sender: e.target.value });
   };
@@ -257,6 +263,7 @@ const Editor = () => {
     <form className="editor">
       <EditorHeader
         mailData={mailData}
+        handleTemplateName={handleTemplateName}
         handleInputSender={handleInputSender}
         handleInputRecipient={handleInputRecipient}
         handleInputSubject={handleInputSubject}
@@ -285,7 +292,7 @@ const Editor = () => {
         handleDragStartNew={handleDragStartNew}
         handleDragEnd={handleDragEnd}
       />
-      <EditorButtonPanel />
+      <EditorButtonPanel mailData={mailData} />
     </form>
   );
 };
