@@ -23,7 +23,7 @@
   width: 200px;
 }
 
-.editor__headerField input {
+.editor__headerInput {
   all: unset;
   width: 55%;
   padding: 5px;
@@ -31,8 +31,29 @@
   border-radius: 8px;
 }
 
-.editor__headerField input:focus {
+.editor__headerInput:focus {
   border: 2px solid var(--bg-accent1);
+}
+
+.editor__headerColorContainer {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.editor__headerLabelColor {
+  width: fit-content;
+}
+
+.editor__headerInputColor {
+  /* -webkit-appearance: none; */
+  /* -moz-appearance: none; */
+  /* appearance: none; */
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
 }
 
 .editor__headerDateContainer {
@@ -59,9 +80,9 @@
   width: 80vw;
   min-height: 45vh;
   padding: 8px;
-  border: 1px solid var(--fg);
+  /* border: 1px solid var(--fg); */
   border-radius: 8px;
-  transition: all 0.3s ease-in-out;
+  transition: padding-bottom 0.3s ease-in-out;
 }
 
 .editor__view--editMode {
@@ -83,7 +104,8 @@
   margin: 4px 0px;
   padding: 8px;
   /* padding-top: 35px; */
-  border: 1px solid var(--bg-accent1);
+  /* border: 1px solid var(--bg-accent1); */
+  background-color: var(--bg);
   border-radius: 8px;
   gap: 5px;
 }

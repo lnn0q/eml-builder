@@ -2,20 +2,8 @@ import { Link } from "react-router-dom";
 import "./styles/Templates.css";
 
 const Templates = () => {
-  let templates = [
-    {
-      name: "Template 1",
-      id: 1,
-    },
-    {
-      name: "Template 2",
-      id: 2,
-    },
-    {
-      name: "Template 3",
-      id: 3,
-    },
-  ];
+  let templates = [];
+
   return (
     <div className="templatesContainer">
       <Link to="/editor" className="templatesContainer__createLink">

@@ -7,6 +7,7 @@ const EditorHeader = ({
   handleInputSubject,
   handleInputDate,
   handleDate,
+  handleInputBackground,
 }) => {
   return (
     <div className="editor__headerPanel">
@@ -18,6 +19,7 @@ const EditorHeader = ({
           value={mailData.Sender}
           onChange={handleInputSender}
           required
+          className="editor__headerInput"
         />
       </div>
       <div className="editor__headerField">
@@ -28,6 +30,7 @@ const EditorHeader = ({
           value={mailData.Recipient}
           onChange={handleInputRecipient}
           required
+          className="editor__headerInput"
         />
       </div>
       <div className="editor__headerField">
@@ -38,6 +41,7 @@ const EditorHeader = ({
           value={mailData.Subject}
           onChange={handleInputSubject}
           required
+          className="editor__headerInput"
         />
       </div>
       <div className="editor__headerField editor__headerField--date">
@@ -48,10 +52,22 @@ const EditorHeader = ({
             name="date"
             value={mailData.Date}
             onChange={handleInputDate}
+            className="editor__headerInput"
           />
           <button className="editor__headerDateButton" onClick={handleDate}>
             &#xf16e2;
           </button>
+        </div>
+      </div>
+      <div className="editor__headerField">
+        <div className="editor__headerColorContainer">
+          <div className="editor__headerLabelColor">Background:</div>
+          <input
+            type="color"
+            value={mailData.bodyColor}
+            onChange={handleInputBackground}
+            className="editor__headerInputColor"
+          />
         </div>
       </div>
     </div>
