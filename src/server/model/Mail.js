@@ -13,6 +13,7 @@ const templateSchema = new Schema({
   height: Number,
   img: String,
   link: String,
+  pos: Number,
 });
 
 const mailSchema = new Schema({

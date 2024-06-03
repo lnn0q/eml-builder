@@ -61,7 +61,7 @@ const EditorComponent = ({
 
   return (
     <div
-      id={element.id}
+      pos={element.pos}
       onDragOver={handleDragOverDroppable}
       className={
         isEditMode
@@ -87,7 +87,7 @@ const EditorComponent = ({
         />
       ) : null}
 
-      {editElement === element.id ? (
+      {editElement === element.pos ? (
         <ComponentEditor
           element={element}
           color={color}

@@ -90,9 +90,9 @@ const Editor = () => {
   const handleDragStartExisting = (e) => {
     setIsDragging(true);
     setDraggedElement({
-      ...mailData[Number(e.target.dataset.id) - 1],
+      ...mailData[Number(e.target.dataset.pos) - 1],
       alreadyExists: true,
-      id: Number(e.target.dataset.id),
+      pos: Number(e.target.dataset.pos),
     });
     // console.log("Dragging id: " + e.target.dataset.id);
   };
@@ -109,7 +109,7 @@ const Editor = () => {
 
   const handleDragOverDroppable = (e) => {
     e.preventDefault();
-    setDropPlace(Number(e.currentTarget.id));
+    setDropPlace(Number(e.currentTarget.pos));
   };
 
   const handleDrop = (e) => {
@@ -117,18 +117,18 @@ const Editor = () => {
     // console.log("Dropping on:" + dropPlace);
     let newMailTemplate;
     if (draggedElement.alreadyExists) {
-      let newId;
+      let newPos;
       if (dropPlace) {
-        newId = dropPlace;
+        newPos = dropPlace;
         // console.log(dropPlace);
       } else {
-        newId = mailData.template[mailData.template.length - 1].id;
+        newPos = mailData.template[mailData.template.length - 1].pos;
       }
       newMailTemplate = mailData.template.map((element) => {
-        if (element.id === draggedElement.id) {
-          element.id = newId;
-        } else if (element.id === newId) {
-          element.id = draggedElement.id;
+        if (element.pos === draggedElement.pos) {
+          element.pos = newPos;
+        } else if (element.pos === newPos) {
+          element.pos = draggedElement.pos;
         }
         return element;
       });
@@ -136,23 +136,23 @@ const Editor = () => {
     } else {
       // console.log(dropPlace);
       if (dropPlace) {
-        draggedElement.id = dropPlace;
+        draggedElement.pos = dropPlace;
       } else if (mailData.template.length === 0) {
-        draggedElement.id = 1;
+        draggedElement.pos = 1;
       } else {
-        draggedElement.id =
-          mailData.template[mailData.template.length - 1].id + 1;
+        draggedElement.pos =
+          mailData.template[mailData.template.length - 1].pos + 1;
       }
       newMailTemplate = mailData.template.map((element) => {
-        if (draggedElement.id <= element.id) {
-          element.id = element.id + 1;
+        if (draggedElement.pos <= element.pos) {
+          element.pos = element.pos + 1;
         }
         return element;
       });
       newMailTemplate.push(draggedElement);
       // console.log(newMailTemplate[draggedElement.id]);
     }
-    newMailTemplate.sort((a, b) => a.id - b.id);
+    newMailTemplate.sort((a, b) => a.pos - b.pos);
     setMailData({ ...mailData, template: newMailTemplate });
     // console.log(draggedElement);
     // console.log(newMailTemplate);
@@ -184,7 +184,7 @@ const Editor = () => {
 
   const handleEditElement = (e) => {
     e.preventDefault();
-    setEditElement(Number(e.target.dataset.id));
+    setEditElement(Number(e.target.dataset.pos));
     // console.log(mailData.template[Number(e.target.dataset.id - 1)]);
     // console.log(e.target.dataset.id);
   };
@@ -209,9 +209,9 @@ const Editor = () => {
   const handleRemoveElement = (e) => {
     e.preventDefault();
     const newMailTemplate = mailData.template.filter((element) => {
-      return element.id !== Number(e.target.dataset.id);
+      return element.pos !== Number(e.target.dataset.pos);
     });
-    newMailTemplate.sort((a, b) => a.id - b.id);
+    newMailTemplate.sort((a, b) => a.pos - b.pos);
     setMailData({ ...mailData, template: newMailTemplate });
   };
 

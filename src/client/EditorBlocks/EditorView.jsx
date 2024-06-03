@@ -29,7 +29,7 @@ const EditorView = ({
       {mailData.template.map((element) => {
         return (
           <EditorComponent
-            key={element.id}
+            key={element.pos}
             element={element}
             isEditMode={isEditMode}
             handleDragOverDroppable={handleDragOverDroppable}

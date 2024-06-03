@@ -2,7 +2,7 @@ import TemplateName from "../model/TemplateName.js";
 import Mail from "../model/Mail.js";
 
 const getMailTemplateNames = (req, res) => {
-  res.json(templateNames);
+  res.json(TemplateName);
 };
 
 const getMailTemplate = (req, res) => {

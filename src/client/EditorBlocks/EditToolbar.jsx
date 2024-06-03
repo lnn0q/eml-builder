@@ -18,14 +18,14 @@ const EditToolbar = ({
       <div className="editor__toolbarTitle">{element.type}</div>
       <div
         className={
-          editElement != element.id
+          editElement != element.pos
             ? "editor__toolbarButtonContainer"
             : "editor__toolbarButtonContainer editor__toolbarButtonContainer--selected"
         }
       >
-        {editElement != element.id ? (
+        {editElement != element.pos ? (
           <button
-            data-id={element.id}
+            data-pos={element.pos}
             onClick={handleEditElement}
             className="editor__editComponentButton editor__editComponentButton--edit"
           >
@@ -33,7 +33,7 @@ const EditToolbar = ({
           </button>
         ) : (
           <button
-            data-id={element.id}
+            data-pos={element.pos}
             onClick={(e) =>
               handleConfirmEdit(e, color, text, width, height, alt, img, link)
             }
@@ -43,7 +43,7 @@ const EditToolbar = ({
           </button>
         )}
         <button
-          data-id={element.id}
+          data-pos={element.pos}
           onClick={handleRemoveElement}
           onDragStart={handleDragStartExisting}
           className="editor__editComponentButton editor__editComponentButton--remove"
@@ -54,7 +54,7 @@ const EditToolbar = ({
           onClick={(e) => {
             e.preventDefault();
           }}
-          data-id={element.id}
+          data-pos={element.pos}
           draggable
           onDragStart={handleDragStartExisting}
           className="editor__editComponentButton editor__editComponentButton--handlePull"
