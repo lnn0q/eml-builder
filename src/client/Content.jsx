@@ -22,7 +22,7 @@ const Content = () => {
       let templatesList = await res.json();
       setTemplates(templatesList);
       setIsLoading(false);
-      console.log(templates);
+      // console.log(templates);
     } catch (err) {
       console.log(err.message);
     }

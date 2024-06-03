@@ -1,0 +1,16 @@
+From: johndoe@test.com
+To: jamesjohnson@test.com
+Subject: Test Subject
+Content-Type: text/html; charset=utf-8
+Content-Disposition: inline
+
+<!DOCTYPE html>
+<html>
+<head></head>
+<body style="background-color: #ffffff">
+<div style="color: #000fff">Test</div>
+<div style="color: #000000">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+<img alt="img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.xn--perrosrazapequea-lub.com%2Fwp-content%2Fuploads%2F2018%2F05%2Fpug-2048x1398.jpg&f=1&nofb=1&ipt=2a85679831aec9a8cf93ee897cd5ea6810323781b89c5655a5cfacf43fbf1ed7&ipo=images" />
+<a href="#" style="color: #c64600">Redirect-EDITED</a>
+</body>
+</html>

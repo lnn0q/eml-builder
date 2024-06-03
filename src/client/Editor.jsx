@@ -35,7 +35,7 @@ const Editor = ({ templates }) => {
     try {
       if (id) {
         const res = await fetch(`/api/template/${id}`);
-        console.log(res);
+        // console.log(res);
         if (!res.ok) throw Error("Failed recieve data");
         let resMailData = await res.json();
         setMailData(resMailData);

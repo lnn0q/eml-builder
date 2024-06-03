@@ -6,7 +6,7 @@ const EditorButtonPanel = ({ mailData, id }) => {
   const uploadTemplate = async (e) => {
     e.preventDefault();
     try {
-      console.log(mailData);
+      // console.log(mailData);
       let method;
       if (id) {
         method = "PUT";
@@ -46,6 +46,29 @@ const EditorButtonPanel = ({ mailData, id }) => {
     }
   };
 
+  const handleExport = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/export-eml", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(mailData),
+      });
+      if (!response.ok) throw Error("Failed recieve data");
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "template.eml");
+      document.body.appendChild(link);
+      link.click();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <div className="editor__buttonPanel">
       {id ? (
@@ -68,8 +91,10 @@ const EditorButtonPanel = ({ mailData, id }) => {
           Save
         </button>
       )}
-      <button className="editor__button">Preview</button>
-      <button className="editor__button">Download</button>
+      {/* <button className="editor__button">Preview</button> */}
+      <button onClick={handleExport} className="editor__button">
+        Download
+      </button>
     </div>
   );
 };
