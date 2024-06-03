@@ -27,7 +27,7 @@ const convertToEml = async (req, res) => {
       if (element.type === "text") {
         elementData = `\n<div style="color: ${element.color}">${element.text}</div>`;
       } else if (element.type === "img") {
-        elementData = `\n<img alt="${element.alt}" src="${element.img}" />`;
+        elementData = `\n<img alt="${element.alt}" width="${element.width}" height="${element.height}" src="${element.img}"/>`;
       } else if (element.type === "link") {
         elementData = `\n<a href="${element.link}" style="color: ${element.color}">${element.text}</a>`;
       } else throw Error(`Invalid element type - ${element.type}`);
