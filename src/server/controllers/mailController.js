@@ -56,20 +56,22 @@ const addMailTemplate = async (req, res) => {
 // };
 
 const updateMailTemplate = async (req, res) => {
-  if (!req?.body?.id) {
+  console.log("check1");
+  if (!req?.body?._id) {
     return res.status(400).json({ message: "ID paramater is required." });
   }
   try {
     const template = await Mail.findOneAndUpdate(
-      { _id: req.body.id },
+      { _id: req.body._id },
       req.body,
       { new: true }
     );
     if (!template) {
       return res
         .status(204)
-        .json({ message: `No template matches ID ${req.body.id}` });
+        .json({ message: `No template matches ID ${req.body._id}` });
     }
+    console.log("check-suc");
     res.status(200).json(template);
   } catch (err) {
     res.status(500).send(err.message);

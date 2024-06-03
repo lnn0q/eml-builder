@@ -335,7 +335,7 @@ const Editor = ({ templates }) => {
         handleDragStartNew={handleDragStartNew}
         handleDragEnd={handleDragEnd}
       />
-      <EditorButtonPanel mailData={mailData} />
+      <EditorButtonPanel mailData={mailData} id={id} />
     </form>
   );
 };

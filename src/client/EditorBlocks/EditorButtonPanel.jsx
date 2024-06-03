@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
 
-const EditorButtonPanel = ({ mailData }) => {
+const EditorButtonPanel = ({ mailData, id }) => {
   const navigate = useNavigate();
 
   const postTemplate = async (e) => {
     e.preventDefault();
     try {
       console.log(mailData);
+      let method;
+      if (id) {
+        method = "PUT";
+      } else {
+        method = "POST";
+      }
       const response = await fetch("/api/template", {
-        method: "POST",
+        method: method,
         headers: {
           "Content-type": "application/json",
         },
