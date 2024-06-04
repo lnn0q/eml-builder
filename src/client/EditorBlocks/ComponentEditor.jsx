@@ -72,7 +72,17 @@ const ComponentEditor = ({
               className="componentEditor__input componentEditor__input--imageParam"
             />
           </div>
-          <div>
+
+          <div className="componentEditor__container">
+            <div className="componentEditor__label">Image link:</div>
+            {/*ADD THE VALUE*/}
+            <input
+              onChange={handleInputImg}
+              className="componentEditor__input"
+            />
+          </div>
+
+          <div className="componentEditor__container">
             <div className="componentEditor__label">Image:</div>
             <input onChange={handleInputImg} type="file" accept="image/*" />
           </div>

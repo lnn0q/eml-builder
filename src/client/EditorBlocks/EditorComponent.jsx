@@ -51,13 +51,17 @@ const EditorComponent = ({
     setAlt(e.target.value);
   };
   const handleInputImg = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64Image = reader.result;
-      setImg(base64Image);
-    };
-    reader.readAsDataURL(file);
+    if (e.target.type === "file") {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result;
+        setImg(base64Image);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImg(e.target.value);
+    }
   };
   const handleInputLink = (e) => {
     setLink(e.target.value);
