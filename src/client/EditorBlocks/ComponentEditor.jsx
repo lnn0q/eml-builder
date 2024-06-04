@@ -74,9 +74,11 @@ const ComponentEditor = ({
           </div>
 
           <div className="componentEditor__container">
-            <div className="componentEditor__label">Image link:</div>
+            <div className="componentEditor__label">Image link/data:</div>
             {/*ADD THE VALUE*/}
             <input
+              type="text"
+              value={img}
               onChange={handleInputImg}
               className="componentEditor__input"
             />
