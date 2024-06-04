@@ -20,6 +20,8 @@ const EditorComponent = ({
   const [alt, setAlt] = useState(element.alt);
   const [img, setImg] = useState(element.img);
   const [link, setLink] = useState(element.link);
+  const [padding, setPadding] = useState(element.padding);
+  const [bgColor, setBgColor] = useState(element.bgColor);
 
   useEffect(() => {
     setColor(element.color);
@@ -29,6 +31,8 @@ const EditorComponent = ({
     setAlt(element.alt);
     setImg(element.img);
     setLink(element.link);
+    setPadding(element.padding);
+    setBgColor(element.bgColor);
   }, [element]);
 
   const handleInputColor = (e) => {
@@ -58,6 +62,12 @@ const EditorComponent = ({
   const handleInputLink = (e) => {
     setLink(e.target.value);
   };
+  const handleInputPadding = (e) => {
+    setPadding(e.target.value);
+  };
+  const handleInputBgColor = (e) => {
+    setBgColor(e.target.value);
+  };
 
   return (
     <div
@@ -84,6 +94,8 @@ const EditorComponent = ({
           alt={alt}
           img={img}
           link={link}
+          padding={padding}
+          bgColor={bgColor}
         />
       ) : null}
 
@@ -97,6 +109,8 @@ const EditorComponent = ({
           alt={alt}
           img={img}
           link={link}
+          padding={padding}
+          bgColor={bgColor}
           handleInputColor={handleInputColor}
           handleInputText={handleInputText}
           handleInputWidth={handleInputWidth}
@@ -104,6 +118,8 @@ const EditorComponent = ({
           handleInputAlt={handleInputAlt}
           handleInputImg={handleInputImg}
           handleInputLink={handleInputLink}
+          handleInputPadding={handleInputPadding}
+          handleInputBgColor={handleInputBgColor}
         />
       ) : element.type === "text" ? (
         <div style={{ color: element.color }}>{element.text}</div>
@@ -116,9 +132,21 @@ const EditorComponent = ({
           style={{ objectFit: "cover" }}
         />
       ) : element.type === "link" ? (
-        <a src={element.link} style={{ color: element.color }}>
-          {element.text}
-        </a>
+        <div>
+          <a
+            // href={element.link}
+            style={{
+              display: "inline-block",
+              color: element.color,
+              // padding: element.padding + "px",
+              // backgroundColor: element.bgColor,
+              ...(element.padding && { padding: element.padding + "px" }),
+              ...(element.bgColor && { backgroundColor: element.bgColor }),
+            }}
+          >
+            {element.text}
+          </a>
+        </div>
       ) : null}
     </div>
   );

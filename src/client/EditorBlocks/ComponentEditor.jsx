@@ -9,6 +9,8 @@ const ComponentEditor = ({
   alt,
   img,
   link,
+  padding,
+  bgColor,
   handleInputColor,
   handleInputText,
   handleInputWidth,
@@ -16,6 +18,8 @@ const ComponentEditor = ({
   handleInputAlt,
   handleInputImg,
   handleInputLink,
+  handleInputPadding,
+  handleInputBgColor,
 }) => {
   return (
     <div className="componentEditor">
@@ -83,6 +87,24 @@ const ComponentEditor = ({
               onChange={handleInputColor}
               value={color}
               className="componentEditor__inputColor"
+            />
+          </div>
+          <div className="componentEditor__container">
+            <div className="componentEditor__label">Background:</div>
+            <input
+              type="color"
+              onChange={handleInputBgColor}
+              value={bgColor}
+              className="componentEditor__inputColor"
+            />
+          </div>
+          <div className="componentEditor__container">
+            <div className="componentEditor__label">Padding(px):</div>
+            <input
+              type="text"
+              onChange={handleInputPadding}
+              value={padding}
+              className="componentEditor__input"
             />
           </div>
           <div className="componentEditor__container">

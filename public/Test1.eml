@@ -1,0 +1,14 @@
+From: test@test.com
+To: test@test.com
+Subject: Test1
+Content-Type: text/html; charset=utf-8
+Content-Disposition: inline
+
+<!DOCTYPE html>
+<html>
+<head></head>
+<body style="background-color: #ffffff">
+<div style="color: #000000">Test</div>
+<div><a href="" style="display: inline-block; padding: 10px color: #eff1f5; background-color: #e66100">link</a></div>
+</body>
+</html>

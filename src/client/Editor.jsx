@@ -120,8 +120,10 @@ const Editor = ({ templates }) => {
         elementProps = {
           type: "link",
           text: "link",
-          color: "#000000",
+          color: "#eff1f5",
           link: "",
+          padding: 5,
+          bgColor: "#7287fd",
         };
         break;
     }
@@ -233,7 +235,18 @@ const Editor = ({ templates }) => {
     // console.log(e.target.dataset.id);
   };
 
-  const handleConfirmEdit = (e, color, text, width, height, alt, img, link) => {
+  const handleConfirmEdit = (
+    e,
+    color,
+    text,
+    width,
+    height,
+    alt,
+    img,
+    link,
+    padding,
+    bgColor
+  ) => {
     e.preventDefault();
     const newMailTemplate = mailData.template.map((element) => {
       return element;
@@ -246,6 +259,8 @@ const Editor = ({ templates }) => {
     alt ? (newMailTemplate[editElement - 1].alt = alt) : null;
     img ? (newMailTemplate[editElement - 1].img = img) : null;
     link ? (newMailTemplate[editElement - 1].link = link) : null;
+    padding ? (newMailTemplate[editElement - 1].padding = padding) : null;
+    bgColor ? (newMailTemplate[editElement - 1].bgColor = bgColor) : null;
     setMailData({ ...mailData, template: newMailTemplate });
     setEditElement(null);
   };

@@ -12,6 +12,8 @@ const EditToolbar = ({
   alt,
   img,
   link,
+  padding,
+  bgColor,
 }) => {
   return (
     <div className="editor__editToolbar">
@@ -35,7 +37,18 @@ const EditToolbar = ({
           <button
             data-pos={element.pos}
             onClick={(e) =>
-              handleConfirmEdit(e, color, text, width, height, alt, img, link)
+              handleConfirmEdit(
+                e,
+                color,
+                text,
+                width,
+                height,
+                alt,
+                img,
+                link,
+                padding,
+                bgColor
+              )
             }
             className="editor__editComponentButton editor__editComponentButton--editConfirm"
           >
